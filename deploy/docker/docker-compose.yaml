@@ -1,0 +1,20 @@
+services:
+  nats:
+    image: nats:2.10-alpine
+    command: ["-js", "-m", "8222"]
+    ports:
+      - "4222:4222"
+      - "8222:8222"
+
+  nats-objstore-s3:
+    build:
+      context: ../..
+      dockerfile: deploy/docker/Dockerfile
+    depends_on:
+      - nats
+    volumes:
+      - ./dev-config.yaml:/etc/nos3/config.yaml:ro
+    ports:
+      - "9000:9000"
+      - "8081:8081"
+      - "9090:9090"

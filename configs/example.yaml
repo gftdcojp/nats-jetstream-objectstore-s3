@@ -1,0 +1,33 @@
+nats:
+  url: "nats://nats.wasmcloud-system:4222"
+  connection_name: "objstore-s3-gw"
+  max_reconnects: -1
+  reconnect_wait: "2s"
+
+s3:
+  listen: ":9000"
+  region: "us-east-1"
+  host_style: "path"
+
+auth:
+  enabled: true
+  access_key_id: "nats-s3-admin"
+  secret_access_key: "changeme"
+
+buckets:
+  auto_create: true
+  default_chunk: 131072  # 128KB
+
+observability:
+  metrics:
+    enabled: true
+    listen: ":9090"
+    path: "/metrics"
+  health:
+    enabled: true
+    listen: ":8081"
+    liveness_path: "/healthz"
+    readiness_path: "/readyz"
+  logging:
+    level: "info"
+    format: "json"

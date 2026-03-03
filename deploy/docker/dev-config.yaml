@@ -1,0 +1,30 @@
+nats:
+  url: "nats://nats:4222"
+  max_reconnects: -1
+
+s3:
+  listen: ":9000"
+  region: "us-east-1"
+  host_style: "path"
+
+auth:
+  enabled: true
+  access_key_id: "nats-s3-admin"
+  secret_access_key: "changeme-dev-only"
+
+buckets:
+  auto_create: true
+  default_chunk: 131072
+
+observability:
+  metrics:
+    enabled: true
+    listen: ":9090"
+  health:
+    enabled: true
+    listen: ":8081"
+    liveness_path: "/healthz"
+    readiness_path: "/readyz"
+  logging:
+    level: "debug"
+    format: "console"
